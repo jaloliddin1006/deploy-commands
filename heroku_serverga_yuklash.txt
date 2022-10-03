@@ -1,0 +1,45 @@
+
+##############--------------serverga yuklash commands ---------------#############
+
+git init   ==> git ni bog'lash, ya'ni, yangi lokal repozitoriya yaratish
+
+
+
+git add -A     ==>  Loyihani qoshish
+
+git commit -m 'o`zgartirish nomi'    ==>> git hubga commit qilish
+
+git push -u orign master ==>>  git hubga push qilish
+
+
+
+//  Loyihani git hubga yuklaymiz {push qilamiz}
+
+
+
+pipenv install gunicorn==19.9.0    ==>  server dasturni o'rnatish
+
+
+>> loyiha ichidan 'Procfile' fayli yaratilib ichiga quidagi kod yoziladi
+ 
+				web: gunicorn config.wsgi --log-file -
+
+>> 'config/settings.py' ning ichiga: 
+					
+				ALLOWED_HOSTS = ['*']
+
+
+>> loyihani  git hub ga yuklaymiz::
+
+
+heroku login   ==> heroku bilan bog'lash
+
+heroku create 'xxxx'  ==>>  app nomi( url manzil bo'ladi )
+
+heroku config:set DISABLE_COLLECTSTATIC=1
+
+git push heroku master   ==>> loyihani herikuga yuklash
+
+heroku ps:scale web=1   ==>> herokuning bepul serveridan foydalanish uchun ruxsat olish
+
+heroku open

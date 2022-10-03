@@ -1,0 +1,33 @@
+ pipenv install django~=3.1.0
+
+ pipenv shell
+
+ django-admin startproject config .
+
+ python manage.py runserver
+
+python manage.py startapp homepage       ==>> 'homepage' nomli yangi app qo'shish
+
+ Ctrl + C      ==> dasturni to'xtatish
+
+ exit     ==> chiqib ketish
+
+pip freeze      ==> o'rnatilgan kutubxonalarni ko'rish
+
+
+
+
+
+####===###===###===###===###===###===###===###===###===###===###===###===###===###
+
+
+
+
+python manage.py migrate     ==> Ma'lumotlar bazasini yaratish
+
+python manage.py makemigrations {appname}  => yaratilgan modelni ma'lumotlar bazasiga qo'shish
+
+python manage.py createsuperuser     ==> admin user yaratish
+
+
+

@@ -1,0 +1,71 @@
+Dasturimizni Herokuga deploy qilishdan avval quyidagi qadamlarni bajarmiz:
+
+1.config/settings.py fayl o’xiriga quyidagi o’zgarishlarni kiritamiz:
+
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+
+2. Terminalda quyidagi buyruqni bajaramiz: python manage.py collectstatic
+
+3. Whitenoise paketini o’rnatamiz. Bu paket serverda statik fayllar to’g’ri ishlashiga javob beradi: pipenv install whitenoise==5.1.0
+
+4. config/settings.py fayl o’xiriga quyidagi o’zgarishlarni kiritamiz (yangi qatorlar #yangiu bilan ajratilgan):
+
+INSTALLED_APPS = [
+   'django.contrib.admin',
+   'django.contrib.auth',
+   'django.contrib.contenttypes',
+   'django.contrib.sessions',
+   'django.contrib.messages',
+   'whitenoise.runserver_nostatic', #yangi
+   'django.contrib.staticfiles',
+   'blog',
+   'accounts',
+]
+MIDDLEWARE = [
+   'django.middleware.security.SecurityMiddleware',
+   'django.contrib.sessions.middleware.SessionMiddleware',
+   'whitenoise.middleware.WhiteNoiseMiddleware', #yangi
+   'django.middleware.common.CommonMiddleware',
+   ...
+]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [str(BASE_DIR.joinpath('static'))]
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+STATICFILES_STORAGE ='whitenoise.storage.CompressedManifestStaticFilesStorage' #yangi
+
+5. Terminalda quyidagi buyruqni bajaramiz: python manage.py collectstatic
+
+
+
+
+
+
+
+
+
+-----------===-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-===-------------
+
+
+Herokuga deploy qilishdan avval:
+1. config/settings.py faylida quyidagi qatorni o’zgartiramiz:
+
+ALLOWED_HOSTS = ['.herokuapp.com', 'localhost', '127.0.0.1']
+
+2. guincorn paketini o’rnatamiz: pipenv install gunicorn
+
+3. Loyihamizning asosiy papkasida Procfil faylini yaratamiz va quyidagi kodni qo’shamiz: web: gunicorn config.wsgi --log-file -
+
+4. O’zgarishlarni GitHubga Push qilamiz.
+
+Navbat bevosita deployga.
+Quyidagi buyruqlarni oldinma-ketib bajaramiz:
+
+heroku login
+heroku create dastur-nomi
+git push heroku master
+heroku ps:scale web=1
+heroku open
+
+

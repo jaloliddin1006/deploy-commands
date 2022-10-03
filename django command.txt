@@ -1,0 +1,29 @@
+django install
+
+ pip install django
+
+
+
+-----------------------------------------------------------------------------------------
+
+django-admin startproject conf .
+
+ python manage.py startapp home
+
+---------->>>> 'DIRS': [str(BASE_DIR.joinpath('templates'))],   <<<<<---------------------
+
+
+
+ python manage.py makemigrations
+
+python manage.py makemigrations home
+
+
+ python manage.py migrate  
+
+ python manage.py createsuperuser
+
+
+
+ python manage.py runserver
+

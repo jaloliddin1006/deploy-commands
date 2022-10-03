@@ -1,0 +1,195 @@
+1. pipenv install 'environs[django]==8.0.0'   ==>> paketni o'rnatamiz
+
+2. setting.py ni ichida:
+"""
+	from environs import Env
+	env = Env()
+	env.read_env()
+"""
+
+3. Asosiy papkada ".env" faylini yaratamiz            ==>>maxfiy qolishi kerak bo'lgan fayllarni saqlash uchun
+
+4. Asosiy papkada ".gitignore" faylini yaratamiz      ==>> bu githubga yuklanmasligi kerak bo'lgan fayllar yoziladi
+"""
+	.env
+	__pycache__/                   ==>> yordamchi fayllar
+	db.sqlite3                     ==>> malumotlar bazasi
+"""
+
+5. .env ni ichiga:
+"""    export DEBUG=True   """
+
+6. settings.py ni ichidagi:
+"""	
+	DEBUG = env.bool("DEBUG", default=False) 		==>> saytdagi xatoliklarni ko'rsatmaslik uchun
+"""   
+                                                ==>> komputerdan ishga tushirilsa xatoliklar ko'rinadi
+7. .env ni ichiga:
+"""
+	export SECRET_KEY={{ settiing.py ni ichidagi secret_keyni olib kelamiz (qo'shtirnoqlarsiz) }}
+"""
+
+8. setting.py ni ichida:
+"""
+    SECRET_KEY = env.str("SECRET_KEY") 
+"""
+-------------------------------------------------------------------------------------------------------------------------------
+9. malumotlar bazasini postgrsql ga o'zgartiramiz:
+	buning uchun setting.py ni ichidagi "DATABASES"ni:
+"""
+	DATABASES = {
+		"default": env.dj_db_url("DATABASE_URL")        ==>> serverda boshqa database dan foydalanadi
+	}
+"""
+
+10. .env ni ichiga:
+"""
+	export DATABASE_URL=sqlite:///db.sqlite3        ==>> komputerni ishga tushirilganda db.sqlite3 dan foydalanadi
+"""
+
+11. serverda postgresql bilan ishlashi uchun paket o'rnatamiz, terminalda:
+"""
+	pipenv install psycopg2-binary
+"""
+
+12. static fayllar herokuda ishlashi uchun paket o'rnatamiz:
+"""
+	pipenv install whitenoise==5.1.0
+"""
+
+13. settings.py da INSTALLED_APPS ni ichiga paketni kiritamiz('django.**.staticfiles' dan oldin):
+"""
+	'whitenoise.runserver_nostatic'
+"""
+
+14.  settings.py da MIDDLEWARE ning 3-qatoriga ham kiritamiz:
+"""
+	'whitenoise.middleware.WhiteNoiseMiddleware'
+"""
+
+15. settings.py da STATICFILES_STORAGE ni o'zgartiramiz, ya'ni sttic fayllarni whitenoise bilan ishlaydigan qilinadi:
+"""
+	STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+"""
+
+16. terminalda:
+"""
+	python manage.py collectstatic      ==>> 'yes'  -->>static fayllarni bir joyga jamlaydi
+"""
+
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+=#=#=#=#=#=#=#=#=#=#=#=#              herokuga tayyorlash                                                                       =#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+
+17. terminalda:
+"""
+	pipenv install gunicorn==19.9.0
+"""
+
+18. Asosiy papka ichidan 'Procfile' faylini yaratamiz va uning ichiga quidagi yoziladi:
+"""
+	web: gunicorn config.wsgi --log-file -
+"""
+
+
+
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+=#=#=#=#=#=#=#=#=#=#=#=#              git ga qo'shishni boshlaymiz                                                              =#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
+
+
+19. terminalda git ni yaratamiz:
+"""
+	git init
+"""
+
+20. terminalda, repezotoriyaga qo'shamiz:
+"""
+	git add -A
+"""
+
+21. terminalda, git hubga commit qilamiz
+"""
+	git commit -m 'birinchi commit'
+"""
+=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#==#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#==#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#==#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#==#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=
+
+22. terminalda, heroku saytini boglaymiz
+""" 
+	heroku login
+"""
+
+23. terminalda, herokuda yangi app yaratamiz:
+"""
+	heroku create jaloliddinblog
+"""
+
+24. terminalda, push qilganda aynan qaysi appga push qilish :
+"""
+	heroku git:remote -a jaloliddinblog
+"""
+
+25. terminalda, heroku serverda postgresql ni yaratamiz:
+"""
+	heroku addons:create heroku-postgresql:hobby-dev      ==>> bu paket bizga tekin malumotlar bazasini beradi
+"""
+
+26. terminalda, loyihamizning secret_keyini herokuga yuklaymiz:
+"""
+	heroku config/;set SECRET_KEY='{{ .env ni ichidagi secret_keyni olib kelamiz(qo'sh tirnoq bilan) }}'
+"""
+
+---26.2 // agar xatolik bersa heroku saytiga kirib 'settings->config vars' ni ichiga
+	'KEY' ga --> SECRET_KEY
+	'VALUE' ga --> {{ loyihani secret keyini yozamiz }}
+	va 'ADD' tugmasi bosiladi
+
+
+27. terminalda, kodimizni herokuga push qilish uchun:
+"""
+	git push heroku master
+"""
+
+28. terminalda, herokuning bepul serveridan foydalanish uchun ruxsat olish
+"""
+	heroku ps:scale web=1   
+"""
+
+29. ter, biz yaratgan modellarni postgresql ga o'tkazishimiz uchun:
+"""
+	heroku run python manage.py migrate
+"""
+ 30. ter, superuser yaratamiz
+"""
+	heroku run python manage.py createsuperuser
+"""                  ==>> maydonni to'ldiramiz
+
+31. ter, sayt yaraatildi, unga kirish:
+"""
+	heroku open
+"""
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

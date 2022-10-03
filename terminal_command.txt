@@ -1,0 +1,38 @@
+pwd     => yo'lni to'liq ochish
+
+cd ..    => bitta tashqi papkaga chiqish
+
+cd Users    => Users nomli papkaga kirish
+
+dir   => joriy papka ichidagi malumotlarni korsatish
+
+ls   => joriy papka ichidagi malumotlarni korsatish {LINUX dayam ishlaydi}
+
+mkdir new_folder  => yangi 'new_folder' papka yaratish
+
+rmdir new_folder    => 'new_folder' nomli  bo'sh papkani o'chiradi
+
+rmdir new_folder -recurse     => 'new_folder' nomli papkani ichidagi barcha fayllari bilan o'chiradi
+
+
+
+Barcha bilishi kerak bo’lgan birlamchi buyruqlar:
+
+
+
+
+
+
+'''
+cd – papkani o’zgartirish
+	Ishlatilishi:
+		cd papkanomi
+		cd c:\usera\admin
+cd .. (yuqoridagi papkaga qaytish)
+ls yoki dir papka ichidagi fayllarni va papkalar ro’yxatini ko’rish
+pwd – papkaga to’liq yo’lni ko’rish
+mkdir – yangi papka yaratish
+	Ishlatilishi: mkdir yangipapka
+rmdir – papkani o’chirish
+	Ishlatilshi: rmdir papkanomi
+'''
