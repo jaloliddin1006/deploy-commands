@@ -25,6 +25,8 @@
 ######  Endi terminalda davom ettiramiz ######
 ## Botimiz turgan papkada terminalni ochamiz ##
 
+5.1. heroku login
+
 5. git init
 
 6. git add .
