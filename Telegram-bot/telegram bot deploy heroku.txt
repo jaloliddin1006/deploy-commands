@@ -25,25 +25,25 @@
 ######  Endi terminalda davom ettiramiz ######
 ## Botimiz turgan papkada terminalni ochamiz ##
 
-5.1. heroku login
+5. heroku login
 
-5. git init
+6. git init
 
-6. git add .
+7. git add .
 
     ## ishlamay qolsa git ni joyini korsatish kerak:
     """ git config --global --add safe.directory D:/Projects/Telegram_bot/TATU_yordamchi_bot """
 
-7. git commit -m "First commit"
+8. git commit -m "First commit"
 
-8. heroku create tatuyordamchibot   //=> app nomini belgilaymiz
+9. heroku create tatuyordamchibot   //=> app nomini belgilaymiz
 
-9. git push heroku master 
+10. git push heroku master 
 
-10. heroku ps    //=>  bot ishlagan ishlamaganini tekshiramiz// holatini aniqlash
+11. heroku ps    //=>  bot ishlagan ishlamaganini tekshiramiz// holatini aniqlash
 
-11. heroku ps:scale worker=1    //=> botni ishga tushuramiz
+12. heroku ps:scale worker=1    //=> botni ishga tushuramiz
 
-12. heroku ps
+13. heroku ps
 
-13. BOT ISHGA TAYYOR
+14. BOT ISHGA TAYYOR
