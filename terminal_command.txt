@@ -14,6 +14,7 @@ rmdir new_folder    => 'new_folder' nomli  bo'sh papkani o'chiradi
 
 rmdir new_folder -recurse     => 'new_folder' nomli papkani ichidagi barcha fayllari bilan o'chiradi
 
+d:    =>agar c diskda turgan bo'lsangiz, d diskka o'tmoqchi bo'lganizda 
 
 
 Barcha bilishi kerak bo’lgan birlamchi buyruqlar:
