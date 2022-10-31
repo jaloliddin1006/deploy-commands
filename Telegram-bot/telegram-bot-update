@@ -1,0 +1,10 @@
+## cdm da
+1. heroku login   // heroku bilan boglanish
+
+2. heroku git:clone -a tatuyordamchibot   // komputerga clone qilib olish
+
+3. cd tatuyordamchibot   // local papkaga kirish
+
+####  lokal papkadagi dasturga o'zgartirishlar kiritiladi ####
+
+4. git add .  // o'zgarishlarni serverga yuklash 
