@@ -1,0 +1,19 @@
+54.175.237.176          ## ulanish uchun IP
+
+
+1)   ssh -i "C:\amazon\amazon_key.pem" ubuntu@54.175.237.176              # severga ulanish buyrug'i
+
+2) sudo apt-get update                 ## serverni yangilash
+
+3) scp -i C:\amazon\amazon_key.pem -r D:\Projects\Telegram_bot\TATU_TT_ariza_bot -r ubuntu@52.90.77.61:/home/ubuntu              ## fayilni serverga joylash
+
+4) sudo apt update && sudo apt install supervisor            ## supervisorni ornatish
+
+5)sudo cp bot.conf /etc/supervisor/conf.d/bot.conf 
+
+6) sudo supervisorctl reread
+
+7) sudo supervisorctl update
+
+8) sudo supervisorctl tail telegrambot stderr         ## xatoliklarni korish
+
