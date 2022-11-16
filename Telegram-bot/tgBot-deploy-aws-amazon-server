@@ -5,11 +5,11 @@
 
 2) sudo apt-get update                 ## serverni yangilash
 
-3) scp -i C:\amazon\amazon_key.pem -r D:\Projects\Telegram_bot\TATU_TT_ariza_bot -r ubuntu@52.90.77.61:/home/ubuntu              ## fayilni serverga joylash
+3) scp -i C:\amazon\amazon_key.pem -r D:\Projects\Telegram_bot\TATU_TT_ariza_bot ubuntu@52.90.77.61:/home/ubuntu              ## fayilni serverga joylash
 
 4) sudo apt update && sudo apt install supervisor            ## supervisorni ornatish
 
-5)sudo cp bot.conf /etc/supervisor/conf.d/bot.conf 
+5) sudo cp bot.conf /etc/supervisor/conf.d/bot.conf 
 
 6) sudo supervisorctl reread
 
