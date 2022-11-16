@@ -9,6 +9,8 @@
 
 4) sudo apt update && sudo apt install supervisor            ## supervisorni ornatish
 
+### bot joylashgan papkani ichiga kirib quidagi amallar bajariladi:
+
 5) sudo cp bot.conf /etc/supervisor/conf.d/bot.conf 
 
 6) sudo supervisorctl reread
